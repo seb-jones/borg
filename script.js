@@ -23,7 +23,9 @@ function setupGame(features)
             .split(',')
             .filter(id => id !== feature.properties.geom_id);
 
-        countries[feature.properties.geom_id] = { neighbours };
+        const name = feature.properties.SOVEREIGNT;
+
+        countries[feature.properties.geom_id] = { name, neighbours };
     });
 
     const mapOptions = {
@@ -44,11 +46,13 @@ function setupGame(features)
 
     geojsonLayer.on('mouseover', e => {
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
+        setHudText(countries[highlightedFeatureId].name.toLowerCase());
         geojsonLayer.resetStyle();
     });
 
     geojsonLayer.on('mouseout', e => {
-        highlightedFeatureId = null
+        highlightedFeatureId = null;
+        setHudText(null);
         geojsonLayer.resetStyle();
     });
 
@@ -76,6 +80,11 @@ function featureStyle(feature)
     }
 
     return styles;
+}
+
+function setHudText(text, randomUppercase = false)
+{
+    document.getElementById('hud-text').innerText = text;
 }
 
 //
