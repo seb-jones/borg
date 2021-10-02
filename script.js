@@ -1,7 +1,3 @@
-// 
-// Global Variables
-//
-
 //
 // Functions
 //
@@ -20,29 +16,37 @@ function setupGame(features)
         zoomControl: false,
     };
 
-    const map = L.map('mapid', options);
+    const map = L.map('map', options);
 
     const geojsonLayer = L.geoJSON(features, {
         style: feature => {
-            return {
-                weight: 2,
+            const styles = {
+                weight: 1,
                 opacity: 1,
                 color: '#00ff00',
-                dashArray: '3',
+                dashArray: '1',
                 fillOpacity: 0.3,
                 fillColor: '#00dd00'
             };
+
+            if (feature.properties.geom_id === highlightedFeatureId) {
+                styles.fillColor = '#00ff00';
+                styles.fillOpacity = 0.5;
+            }
+
+            return styles;
         }
     }).addTo(map);
 
-    // geojsonLayer.on('click', e => console.log(e.sourceTarget.feature.properties.SOVEREIGNT));
-
     geojsonLayer.on('mouseover', e => {
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
-        console.log(highlightedFeatureId);
         geojsonLayer.resetStyle();
     });
-    geojsonLayer.on('mouseout', e => highlightedFeatureId = null);
+
+    geojsonLayer.on('mouseout', e => {
+        highlightedFeatureId = null
+        geojsonLayer.resetStyle();
+    });
 
     map.fitBounds(geojsonLayer.getBounds());
 
@@ -57,4 +61,3 @@ function setupGame(features)
 fetch('/data/world-map-simplified-minified.geojson')
     .then(response => response.json())
     .then(data => setupGame(data.features))
-

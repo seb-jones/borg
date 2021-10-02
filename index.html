@@ -16,16 +16,30 @@
                 >
         </script>
 
-        <!-- Set map background to black -->
         <style>
+            /* Set map background to black */
             .leaflet-container {
                 background: black;
+            }
+
+            /* Size the map to the entire browser viewport */
+            html, body {
+              padding: 0;
+              margin: 0;
+              height: 100%;
+              overflow: hidden;
+              width: 100%;
+            }
+
+            #map {
+              width: auto;
+              height: 100%;
             }
         </style>
 
         <script src="/script.js" defer></script>
     </head>
     <body>
-        <div id="mapid" style="height: 500px"></div>
+        <div id="map"></div>
     </body>
 </html>
