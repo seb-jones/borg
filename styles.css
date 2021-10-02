@@ -1,0 +1,50 @@
+/* Set map background to black */
+.leaflet-container {
+    background: black;
+}
+
+/*
+ * Size the map to the entire browser viewport
+ */
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+#map {
+    width: auto;
+    height: 100%;
+}
+
+/* 
+ * Fixed-position heads up display
+ */
+
+#hud {
+    font-family: 'Major Mono Display', monospace; 
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+    color: #ffffff;
+    pointer-events: none;
+    text-shadow: 1px 1px black;
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 2px solid white;
+    border-bottom: 0;
+    border-right: 0;
+    border-radius: 10px 0 0 0;
+    padding: 1rem;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
