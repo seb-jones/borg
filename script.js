@@ -82,9 +82,16 @@ function featureStyle(feature)
     return styles;
 }
 
-function setHudText(text, randomUppercase = false)
+function setHudText(text = null)
 {
-    document.getElementById('hud-text').innerText = text;
+    const hudDiv = document.getElementById('hud');
+
+    if (text === null) {
+        hudDiv.style.display = 'none';
+    } else {
+        hudDiv.style.display = 'block';
+        document.getElementById('hud-text').innerText = text;
+    }
 }
 
 //
