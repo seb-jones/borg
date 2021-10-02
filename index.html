@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width">
         <title>Borg</title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
                                integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
                                crossorigin=""
@@ -35,11 +39,40 @@
               width: auto;
               height: 100%;
             }
+            
+            /* Fixed-position heads up display */
+            #hud {
+                font-family: 'Major Mono Display', monospace; 
+                font-size: 1.3rem;
+                font-weight: bold;
+                display: block;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                z-index: 9999;
+                color: #ffffff;
+                pointer-events: none;
+                text-shadow: 1px 1px black;
+                background-color: rgba(0, 0, 0, 0.75);
+                border: 2px solid white;
+                border-bottom: 0;
+                border-right: 0;
+                border-radius: 10px 0 0 0;
+                padding: 1rem;
+            }
+
+            p {
+                padding: 0;
+                margin: 0;
+            }
         </style>
 
         <script src="/script.js" defer></script>
     </head>
     <body>
         <div id="map"></div>
+        <div id="hud">
+            <p>Hello world</p>
+        </div>
     </body>
 </html>
