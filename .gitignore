@@ -1,0 +1,5 @@
+# Every file in the data directory...
+/data/*
+
+# ... except our minified map data
+!/data/world-map-simplified-minified.geojson
