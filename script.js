@@ -1,12 +1,32 @@
 //
+// Global Variables
+//
+
+// The ID of the country that the mouse is currently hovering over.
+let highlightedFeatureId = null;
+
+// Each key in this object is the ID of a country, and each value is an object
+// containing various data about the country
+let countries = {};
+
+//
 // Functions
 //
 
 function setupGame(features)
 {
-    let highlightedFeatureId = null;
+    // Populate neighbours global object with data from the features array
+    features.forEach(feature => {
+        const neighbours = feature
+            .properties
+            .neighbours
+            .split(',')
+            .filter(id => id !== feature.properties.geom_id);
 
-    const options = {
+        countries[feature.properties.geom_id] = { neighbours };
+    });
+
+    const mapOptions = {
         minZoom: 2,
 
         // Remove 'Leaflet' link from the bottom-right corner of the map
@@ -16,26 +36,10 @@ function setupGame(features)
         zoomControl: false,
     };
 
-    const map = L.map('map', options);
+    const map = L.map('map', mapOptions);
 
     const geojsonLayer = L.geoJSON(features, {
-        style: feature => {
-            const styles = {
-                weight: 1,
-                opacity: 1,
-                color: '#00ff00',
-                dashArray: '1',
-                fillOpacity: 0.3,
-                fillColor: '#00dd00'
-            };
-
-            if (feature.properties.geom_id === highlightedFeatureId) {
-                styles.fillColor = '#00ff00';
-                styles.fillOpacity = 0.5;
-            }
-
-            return styles;
-        }
+        style: featureStyle
     }).addTo(map);
 
     geojsonLayer.on('mouseover', e => {
@@ -51,6 +55,27 @@ function setupGame(features)
     map.fitBounds(geojsonLayer.getBounds());
 
     map.setMaxBounds(geojsonLayer.getBounds());
+}
+
+function featureStyle(feature)
+{
+    const styles = {
+        weight: 1,
+        opacity: 1,
+        color: '#00ff00',
+        dashArray: '1',
+        fillOpacity: 0.3,
+        fillColor: '#00dd00'
+    };
+
+    const id = feature.properties.geom_id;
+
+    if (id === highlightedFeatureId) {
+        styles.fillColor = '#00ff00';
+        styles.fillOpacity = 0.5;
+    }
+
+    return styles;
 }
 
 //
