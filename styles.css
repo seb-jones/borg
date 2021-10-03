@@ -1,3 +1,8 @@
+
+@font-face {
+    font-family: "TerminusTTF";
+    src: url("/fonts/TerminusTTF-4.49.1.ttf");
+}
 /* Set map background to black */
 .leaflet-container {
     background: black;
@@ -25,8 +30,8 @@ html, body {
  */
 
 #hud {
-    font-family: 'Space Mono', monospace; 
-    font-size: 1.2rem; 
+    font-family: 'TerminusTTF', monospace; 
+    font-size: 24px; 
     display: block;
     position: fixed;
     bottom: 0;
@@ -57,8 +62,8 @@ p {
  * LeafletJS Tooltips
  */
 .leaflet-tooltip {
-    font-family: 'Space Mono', monospace; 
-    font-size: 1.3rem;
+    font-family: 'TerminusTTF', monospace; 
+    font-size: 24px;
     background-color: rgba(0, 0, 0, 0.8);
     color: #ffffff;
     padding: 0 0.5rem;
@@ -88,7 +93,7 @@ p {
     bottom: 0;
     right: 0;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
     z-index: 9999;
     background-size: 100% 10px, 3px 100%;
     pointer-events: none;
