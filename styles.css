@@ -25,9 +25,6 @@ html, body {
  */
 
 #hud {
-    font-family: 'VT323', monospace; 
-    font-size: 1.5rem;
-    font-weight: bold;
     display: none;
     position: fixed;
     bottom: 0;
@@ -47,4 +44,26 @@ html, body {
 p {
     padding: 0;
     margin: 0;
+}
+
+/*
+ * LeafletJS Tooltips
+ */
+.leaflet-tooltip {
+    font-family: 'Space Mono', monospace !important; 
+    font-size: 1.3rem !important;
+    /* background-color: rgba(0, 0, 0, 0.8); */
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 0 0.5rem;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+}
+
+/* Hide the triangle in the tooltip */
+.leaflet-tooltip-top:before, 
+.leaflet-tooltip-bottom:before, 
+.leaflet-tooltip-left:before, 
+.leaflet-tooltip-right:before {
+    /* border: none !important; */
 }

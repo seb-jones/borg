@@ -57,7 +57,9 @@ function setupGame(countryFeatures, cityFeatures)
     //     pointToLayer: (feature, latlng) => L.circleMarker(latlng, cityMarkerOptions),
     // }).addTo(map);
 
-    countryLayer.bindTooltip('').openTooltip();
+    countryLayer.bindTooltip('', {
+        sticky: true,
+    }).openTooltip();
 
     countryLayer.on('mouseover', e => {
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
