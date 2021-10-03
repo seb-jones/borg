@@ -9,12 +9,18 @@ let highlightedFeatureId = null;
 // containing various data about the country
 let countries = {};
 
+// Each key is the name of the audio file, each value is the Audio instance
+let sounds = {};
+
 //
 // Functions
 //
 
 function setupGame(countryFeatures, cityFeatures)
 {
+    // Load sounds
+    loadSound('hover', '/audio/misc_menu.wav');
+
     // Populate countries global object with data from the features array
     countryFeatures.forEach(feature => {
         const neighbours = feature
@@ -67,6 +73,7 @@ function setupGame(countryFeatures, cityFeatures)
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
         countryLayer.setTooltipContent(countries[highlightedFeatureId].name);
         countryLayer.resetStyle();
+        playSound('hover');
     });
 
     countryLayer.on('mouseout', e => {
@@ -98,6 +105,19 @@ function featureStyle(feature)
     }
 
     return styles;
+}
+
+function loadSound(key, url)
+{
+    sounds[key] = new Audio(url);  
+    sounds[key].type = 'audio/wav';
+    sounds[key].volume = 0.1;
+}
+
+function playSound(key)
+{
+    sounds[key].currentTime = 0;
+    sounds[key].play();
 }
 
 function setHudText(text = null)
