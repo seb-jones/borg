@@ -36,6 +36,8 @@ function setupGame(countryFeatures, cityFeatures)
 
         // Remove Zoom buttons from the top-left corner of the map
         zoomControl: false,
+
+        zoomSnap: 2,
     };
 
     const map = L.map('map', mapOptions);
