@@ -59,7 +59,9 @@ p {
     border-radius: 5px;
 }
 
-/* Hide the triangle in the tooltip */
+/* 
+ * Hide the triangle in the tooltip
+ */
 .leaflet-tooltip-top:before, 
 .leaflet-tooltip-bottom:before, 
 .leaflet-tooltip-left:before, 
@@ -67,7 +69,9 @@ p {
     border: none !important;
 }
 
-/* CRT Scanline effect */
+/*
+ * CRT Scanline effect
+ */
 #crt-effect {
     content: " ";
     display: block;
@@ -83,7 +87,9 @@ p {
     pointer-events: none;
 }
 
-/* CRT Flicker effect */
+/*
+ * CRT Flicker effect 
+ */
 @keyframes flicker {
     0% {
         opacity: 0.27861;
