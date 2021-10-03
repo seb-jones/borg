@@ -88,9 +88,9 @@ function setupGame(countryFeatures, cityFeatures)
 
     map.setMaxBounds(countryLayer.getBounds());
 
-    addHudLine('Hello');
-    addHudLine('The string to be parsed as HTML or XML and inserted into the tree.');
-    addHudLine('World');
+    // addHudLine('Hello');
+    // addHudLine('The string to be parsed as HTML or XML and inserted into the tree.');
+    // addHudLine('World');
     addHudLine('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.');
 }
 
@@ -134,7 +134,17 @@ function addHudLine(text)
 {
     const hudDiv = document.getElementById('hud');
 
-    hudDiv.innerText += '\n\n' + text;
+    const speed = 50;
+
+    let pointer = 0;
+    let timer = setInterval(function(){
+            pointer++;
+        if (pointer <= text.length) {
+            hudDiv.innerText += text.substring(pointer, pointer + 1);
+        } else {
+            clearInterval(timer);
+        }
+    }, speed);
 }
 
 //
