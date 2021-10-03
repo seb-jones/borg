@@ -52,7 +52,6 @@ p {
 .leaflet-tooltip {
     font-family: 'Space Mono', monospace !important; 
     font-size: 1.3rem !important;
-    /* background-color: rgba(0, 0, 0, 0.8); */
     background-color: rgba(0, 0, 0, 0.8);
     color: #ffffff;
     padding: 0 0.5rem;
@@ -65,5 +64,5 @@ p {
 .leaflet-tooltip-bottom:before, 
 .leaflet-tooltip-left:before, 
 .leaflet-tooltip-right:before {
-    /* border: none !important; */
+    border: none !important;
 }
