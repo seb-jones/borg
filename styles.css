@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: "TerminusTTF";
-    src: url("/fonts/TerminusTTF-4.49.1.ttf");
+    src: url("/fonts/TerminusTTF-Bold-4.49.1.ttf");
 }
 /* Set map background to black */
 .leaflet-container {
