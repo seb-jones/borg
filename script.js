@@ -19,7 +19,8 @@ let sounds = {};
 function setupGame(countryFeatures, cityFeatures)
 {
     // Load sounds
-    loadSound('hover', '/audio/misc_menu.wav');
+    loadSound('mouseover', '/audio/mouseover.wav');
+    loadSound('zoom', '/audio/zoom.wav');
 
     // Populate countries global object with data from the features array
     countryFeatures.forEach(feature => {
@@ -52,6 +53,8 @@ function setupGame(countryFeatures, cityFeatures)
         style: featureStyle
     }).addTo(map);
 
+    map.on('zoomstart', e => playSound('zoom'));
+
     // const cityMarkerOptions = {
     //     radius: 4,
     //     fillColor: "#dddddd",
@@ -73,7 +76,7 @@ function setupGame(countryFeatures, cityFeatures)
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
         countryLayer.setTooltipContent(countries[highlightedFeatureId].name);
         countryLayer.resetStyle();
-        playSound('hover');
+        playSound('mouseover');
     });
 
     countryLayer.on('mouseout', e => {
