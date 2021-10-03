@@ -13,10 +13,10 @@ let countries = {};
 // Functions
 //
 
-function setupGame(features)
+function setupGame(countryFeatures, cityFeatures)
 {
-    // Populate neighbours global object with data from the features array
-    features.forEach(feature => {
+    // Populate countries global object with data from the features array
+    countryFeatures.forEach(feature => {
         const neighbours = feature
             .properties
             .neighbours
@@ -40,25 +40,38 @@ function setupGame(features)
 
     const map = L.map('map', mapOptions);
 
-    const geojsonLayer = L.geoJSON(features, {
+    const countryLayer = L.geoJSON(countryFeatures, {
         style: featureStyle
     }).addTo(map);
 
-    geojsonLayer.on('mouseover', e => {
+    // const cityMarkerOptions = {
+    //     radius: 4,
+    //     fillColor: "#dddddd",
+    //     color: "#ffffff",
+    //     weight: 1,
+    //     opacity: 1.0,
+    //     fillOpacity: 1.0
+    // };
+
+    // const cityLayer = L.geoJSON(cityFeatures, {
+    //     pointToLayer: (feature, latlng) => L.circleMarker(latlng, cityMarkerOptions),
+    // }).addTo(map);
+
+    countryLayer.on('mouseover', e => {
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
         setHudText(countries[highlightedFeatureId].name.toLowerCase());
-        geojsonLayer.resetStyle();
+        countryLayer.resetStyle();
     });
 
-    geojsonLayer.on('mouseout', e => {
+    countryLayer.on('mouseout', e => {
         highlightedFeatureId = null;
         setHudText(null);
-        geojsonLayer.resetStyle();
+        countryLayer.resetStyle();
     });
 
-    map.fitBounds(geojsonLayer.getBounds());
+    map.fitBounds(countryLayer.getBounds());
 
-    map.setMaxBounds(geojsonLayer.getBounds());
+    map.setMaxBounds(countryLayer.getBounds());
 }
 
 function featureStyle(feature)
@@ -99,6 +112,9 @@ function setHudText(text = null)
 //
 
 // Fetch the GeoJSON data from the server and setup the game when that's done
-fetch('/data/world-map-simplified-minified.geojson')
-    .then(response => response.json())
-    .then(data => setupGame(data.features))
+Promise.all([
+    fetch('/data/world-map-simplified-minified.geojson').then(response => response.json()),
+    fetch('/data/cities-minified.geojson').then(response => response.json()),
+]).then(results => {
+    setupGame(results[0].features, results[1].features);
+});

@@ -3,3 +3,4 @@
 
 # ... except our minified map data
 !/data/world-map-simplified-minified.geojson
+!/data/cities-minified.geojson
