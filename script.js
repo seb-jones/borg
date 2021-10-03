@@ -57,15 +57,16 @@ function setupGame(countryFeatures, cityFeatures)
     //     pointToLayer: (feature, latlng) => L.circleMarker(latlng, cityMarkerOptions),
     // }).addTo(map);
 
+    countryLayer.bindTooltip('').openTooltip();
+
     countryLayer.on('mouseover', e => {
         highlightedFeatureId = e.sourceTarget.feature.properties.geom_id;
-        setHudText(countries[highlightedFeatureId].name.toLowerCase());
+        countryLayer.setTooltipContent(countries[highlightedFeatureId].name);
         countryLayer.resetStyle();
     });
 
     countryLayer.on('mouseout', e => {
         highlightedFeatureId = null;
-        setHudText(null);
         countryLayer.resetStyle();
     });
 
