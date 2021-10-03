@@ -87,6 +87,11 @@ function setupGame(countryFeatures, cityFeatures)
     map.fitBounds(countryLayer.getBounds());
 
     map.setMaxBounds(countryLayer.getBounds());
+
+    addHudLine('Hello');
+    addHudLine('The string to be parsed as HTML or XML and inserted into the tree.');
+    addHudLine('World');
+    addHudLine('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.');
 }
 
 function featureStyle(feature)
@@ -125,16 +130,11 @@ function playSound(key, loop = false)
     sounds[key].play();
 }
 
-function setHudText(text = null)
+function addHudLine(text)
 {
     const hudDiv = document.getElementById('hud');
 
-    if (text === null) {
-        hudDiv.style.display = 'none';
-    } else {
-        hudDiv.style.display = 'block';
-        document.getElementById('hud-text').innerText = text;
-    }
+    hudDiv.innerText += '\n\n' + text;
 }
 
 //

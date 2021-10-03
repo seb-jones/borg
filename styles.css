@@ -32,7 +32,6 @@ html, body {
 #hud {
     font-family: 'TerminusTTF', monospace; 
     font-size: 24px; 
-    display: block;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -46,16 +45,11 @@ html, body {
     border-bottom: 0;
     border-left: 0;
     border-radius: 0 10px 0 0;
-    padding: 1rem;
+    padding: 2rem 1rem;
     max-height: 20vh;
     overflow: hidden;
     display: flex;
     flex-direction: column-reverse;
-}
-
-p {
-    padding: 0;
-    margin: 0;
 }
 
 /*
