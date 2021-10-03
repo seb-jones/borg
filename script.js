@@ -110,16 +110,18 @@ function featureStyle(feature)
     return styles;
 }
 
-function loadSound(key, url)
+function loadSound(key, url, type ='wav')
 {
     sounds[key] = new Audio(url);  
-    sounds[key].type = 'audio/wav';
+    sounds[key].preload = 'auto';
+    sounds[key].type = 'audio/' + type;
     sounds[key].volume = 0.1;
 }
 
-function playSound(key)
+function playSound(key, loop = false)
 {
     sounds[key].currentTime = 0;
+    sounds[key].loop = loop;
     sounds[key].play();
 }
 
