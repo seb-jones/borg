@@ -21,6 +21,7 @@ function setupGame(countryFeatures, cityFeatures)
     // Load sounds
     loadSound('mouseover', '/audio/mouseover.wav');
     loadSound('zoom', '/audio/zoom.wav');
+    loadSound('typewriter', '/audio/typewriter.wav');
 
     // Populate countries global object with data from the features array
     countryFeatures.forEach(feature => {
@@ -124,7 +125,7 @@ function loadSound(key, url, type ='wav')
 {
     sounds[key] = new Audio(url);  
     sounds[key].preload = 'auto';
-    sounds[key].type = 'audio/' + type;
+    sounds[key].type = `audio/${type}`;
     sounds[key].volume = 0.1;
 }
 
@@ -133,6 +134,17 @@ function playSound(key, loop = false)
     sounds[key].currentTime = 0;
     sounds[key].loop = loop;
     sounds[key].play();
+}
+
+function stopSound(key, loop = false)
+{
+    sounds[key].pause();
+    sounds[key].currentTime = 0;
+}
+
+function soundIsNotPlaying(key) 
+{
+    return sounds[key].paused;
 }
 
 function addHudLine(text)
@@ -146,11 +158,18 @@ function addHudLine(text)
     const speed = 20;
 
     let pointer = 0;
-    let timer = setInterval(function(){
-            pointer++;
+
+    let timer = setInterval(function() {
+        pointer++;
+
         if (pointer <= text.length) {
+            if (soundIsNotPlaying('typewriter')) {
+                playSound('typewriter', true);
+            }
+
             hudP.innerText = text.substring(0, pointer);
         } else {
+            stopSound('typewriter');
             clearInterval(timer);
         }
     }, speed);
