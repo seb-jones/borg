@@ -45,11 +45,17 @@ html, body {
     border-bottom: 0;
     border-left: 0;
     border-radius: 0 10px 0 0;
-    padding: 2rem 1rem;
+    padding: 2rem;
     max-height: 20vh;
     overflow: hidden;
     display: flex;
     flex-direction: column-reverse;
+    row-gap: 1rem;
+}
+
+#hud > p {
+    margin: 0;
+    padding: 0;
 }
 
 /*

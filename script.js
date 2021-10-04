@@ -84,13 +84,18 @@ function setupGame(countryFeatures, cityFeatures)
         countryLayer.resetStyle();
     });
 
+    countryLayer.on('click', e => {
+        const { "SOVEREIGNT": name } = e.sourceTarget.feature.properties;
+
+        const pop = Math.floor(Math.random() * 10000000000000);
+
+        addHudLine(`${name} has an estimated population of ${pop}`);
+    });
+
     map.fitBounds(countryLayer.getBounds());
 
     map.setMaxBounds(countryLayer.getBounds());
 
-    // addHudLine('Hello');
-    // addHudLine('The string to be parsed as HTML or XML and inserted into the tree.');
-    // addHudLine('World');
     addHudLine('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.');
 }
 
@@ -134,13 +139,17 @@ function addHudLine(text)
 {
     const hudDiv = document.getElementById('hud');
 
-    const speed = 50;
+    hudDiv.insertAdjacentHTML('afterbegin', '<p></p>');
+
+    const hudP = hudDiv.firstElementChild;
+
+    const speed = 20;
 
     let pointer = 0;
     let timer = setInterval(function(){
             pointer++;
         if (pointer <= text.length) {
-            hudDiv.innerText += text.substring(pointer, pointer + 1);
+            hudP.innerText = text.substring(0, pointer);
         } else {
             clearInterval(timer);
         }
